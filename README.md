@@ -13,6 +13,8 @@ Right now, I am experiementing with creating a sort of intermediary API that wil
 the remote CTA Train Tracker API. I want to take this approach to get some experience developing APIs in Java, as using a framework like Express with Node or
 React would be much easier in this context. I might shift this choice later on, but we will see.
 
+Spring Boot might not be the right choice either because it usually interfaces with a database, which as of right now, I don't plan on using. I could store each user's stops in a NOSQL database, but I don't need much functionality of my API; it is solely to add the API key to the URL. This also might change, but for now I am content with my initial idea. 
+
 ### Technology
 The technologies I plan on using are Javascript, Java, Spring Boot, and the CTA Train Tracker API.
 
