@@ -18,6 +18,8 @@ Spring Boot might not be the right choice either because it usually interfaces w
 2/18/2022 Update
 I'm having issues with Java dependencies, Maven, and other configuration stuff, so I might try and implement this using Django. This is something I've been looking into for over a year, but have yet to work with Django on a project.
 
+I've fully pivoted to using Django.
+
 ### Technology
 The technologies I plan on using are Javascript, Java, Spring Boot, and the CTA Train Tracker API.
 

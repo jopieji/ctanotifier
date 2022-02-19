@@ -1,3 +1,8 @@
 notes.txt
 .env
-C:\Users\Jake Opie\ctanotifier\ctanotifierdjango\ctanotifierdjango\settings.py
+/ctanotifierdjango/ctanotifierdjango/settings.py
+/django-env
+ctanotifierdjango/db.sqlite3
+ctanotifierdjango/ctanotifierdjango/__pycache__
+ctanotifierdjango/djangocta/__pycache__
+ctanotifierdjango/djangocta/migrations
