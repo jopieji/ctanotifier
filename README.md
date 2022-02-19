@@ -9,8 +9,17 @@ user know when their train or bus is coming. This app will hopefully be useful t
 tracker out right now. The browser notifications will be perfect for students, who so often have many many tabs open and might forget to
 keep an eye on when their bus/train might show up!
 
+Right now, I am experiementing with creating a sort of intermediary API that will take requests from my Javascript, insert the API key and make a call to 
+the remote CTA Train Tracker API. I want to take this approach to get some experience developing APIs in Java, as using a framework like Express with Node or
+React would be much easier in this context. I might shift this choice later on, but we will see.
+
+Spring Boot might not be the right choice either because it usually interfaces with a database, which as of right now, I don't plan on using. I could store each user's stops in a NOSQL database, but I don't need much functionality of my API; it is solely to add the API key to the URL. This also might change, but for now I am content with my initial idea. 
+
+2/18/2022 Update
+I'm having issues with Java dependencies, Maven, and other configuration stuff, so I might try and implement this using Django. This is something I've been looking into for over a year, but have yet to work with Django on a project.
+
 ### Technology
-The technologies I plan on using are Vanilla Javascript, Node.js, and the CTA Train Tracker API. 
+The technologies I plan on using are Javascript, Java, Spring Boot, and the CTA Train Tracker API.
 
 I might add the CTA Bus Tracker API once I get an MVP up and running.
 
