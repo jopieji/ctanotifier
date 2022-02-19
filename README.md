@@ -15,6 +15,9 @@ React would be much easier in this context. I might shift this choice later on, 
 
 Spring Boot might not be the right choice either because it usually interfaces with a database, which as of right now, I don't plan on using. I could store each user's stops in a NOSQL database, but I don't need much functionality of my API; it is solely to add the API key to the URL. This also might change, but for now I am content with my initial idea. 
 
+2/18/2022 Update
+I'm having issues with Java dependencies, Maven, and other configuration stuff, so I might try and implement this using Django. This is something I've been looking into for over a year, but have yet to work with Django on a project.
+
 ### Technology
 The technologies I plan on using are Javascript, Java, Spring Boot, and the CTA Train Tracker API.
 
