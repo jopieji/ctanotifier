@@ -6,3 +6,5 @@ ctanotifierdjango/db.sqlite3
 ctanotifierdjango/ctanotifierdjango/__pycache__
 ctanotifierdjango/djangocta/__pycache__
 ctanotifierdjango/djangocta/migrations
+ctanotifierdjango/djangocta/config.py
+ctanotifierdjango/djangocta/keyHold.py
