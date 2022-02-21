@@ -9,7 +9,7 @@ def index(request):
     # base url: http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx
     url = "http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key={}&stpid=30126&outputType=JSON"
     #key = keyHold.TT_API_K
-    key = "880e68d77bed4ca4b68a5681cbf7def5"
+    key = "keyGoHere"
     response = requests.get(url.format(key)).json()
     #print(response.text)
 
@@ -17,6 +17,15 @@ def index(request):
     # more than one dictionary per response
     ## ctatt is the exterior
     
+    estArrivalFormatted = response['ctatt']['eta'][0]['arrT']
+
+    firstTwo = estArrivalFormatted[11:13]
+    if int(firstTwo) > 12:
+        hrNum = int(firstTwo) - 12
+        estArrivalFormatted = str(hrNum) + estArrivalFormatted[13:] + " PM"
+    else:
+        estArrivalFormatted = estArrivalFormatted[11:] + " AM"
+
     stop_data = {
         # stopID will be inserted with variable once its working; just like key is in URL above; just use that variable
         'requestTime' : response['ctatt']['tmst'],
@@ -24,7 +33,7 @@ def index(request):
         'stationName' : response['ctatt']['eta'][0]['staNm'],
         'destinationName' : response['ctatt']['eta'][0]['destNm'],
         'predictionTime' : response['ctatt']['eta'][0]['prdt'],
-        'arrivalTime' : response['ctatt']['eta'][0]['arrT'],
+        'arrivalTime' : estArrivalFormatted,
         'approachingBool' : response['ctatt']['eta'][0]['isApp'],
         'delayedBool' : response['ctatt']['eta'][0]['isDly']
     }
