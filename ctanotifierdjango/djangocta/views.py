@@ -9,7 +9,7 @@ def index(request):
     # base url: http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx
     url = "http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key={}&stpid=30126&outputType=JSON"
     #key = keyHold.TT_API_K
-    key = "keyGoHere"
+    key = "880e68d77bed4ca4b68a5681cbf7def5"
     response = requests.get(url.format(key)).json()
     #print(response.text)
 
@@ -28,5 +28,8 @@ def index(request):
         'approachingBool' : response['ctatt']['eta'][0]['isApp'],
         'delayedBool' : response['ctatt']['eta'][0]['isDly']
     }
-    print(stop_data)
-    return render(request, 'djangocta/djangocta.html')
+
+    # passing info to template
+    context = {'stop_data' : stop_data}
+
+    return render(request, 'djangocta/djangocta.html', context)
