@@ -17,6 +17,15 @@ def index(request):
     # more than one dictionary per response
     ## ctatt is the exterior
     
+    estArrivalFormatted = response['ctatt']['eta'][0]['arrT']
+
+    firstTwo = estArrivalFormatted[11:13]
+    if int(firstTwo) > 12:
+        hrNum = int(firstTwo) - 12
+        estArrivalFormatted = str(hrNum) + estArrivalFormatted[13:] + " PM"
+    else:
+        estArrivalFormatted = estArrivalFormatted[11:] + " AM"
+
     stop_data = {
         # stopID will be inserted with variable once its working; just like key is in URL above; just use that variable
         'requestTime' : response['ctatt']['tmst'],
@@ -24,9 +33,12 @@ def index(request):
         'stationName' : response['ctatt']['eta'][0]['staNm'],
         'destinationName' : response['ctatt']['eta'][0]['destNm'],
         'predictionTime' : response['ctatt']['eta'][0]['prdt'],
-        'arrivalTime' : response['ctatt']['eta'][0]['arrT'],
+        'arrivalTime' : estArrivalFormatted,
         'approachingBool' : response['ctatt']['eta'][0]['isApp'],
         'delayedBool' : response['ctatt']['eta'][0]['isDly']
     }
-    print(stop_data)
-    return render(request, 'djangocta/djangocta.html')
+
+    # passing info to template
+    context = {'stop_data' : stop_data}
+
+    return render(request, 'djangocta/djangocta.html', context)

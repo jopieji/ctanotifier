@@ -26,7 +26,7 @@
                     <form method="POST">
                         <div class="field has-addons">
                             <div class="control is-expanded">
-                                <input class="input" type="text" placeholder="City Name">
+                                <input class="input" type="text" placeholder="Stop Name">
                             </div>
                             <div class="control">
                                 <button class="button is-info">
@@ -45,18 +45,20 @@
                 <div class="column is-offset-4 is-4">
                     <div class="box">
                         <article class="media">
+                            <!--
                             <div class="media-left">
                                 <figure class="image is-50x50">
-                                    <img src="http://openweathermap.org/img/w/10d.png" alt="Image">
+                                    <img src="..\ctaLogo50.jpg" alt="Image">
                                 </figure>
                             </div>
+                            -->
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <span class="title">Chicago</span>
+                                        <span class="title">{{stop_data.stationName}}</span>
                                         <br>
-                                        <span class="subtitle">32° F</span>
-                                        <br> Snowing, per usual
+                                        <span class="subtitle">Estimated Arrival: {{stop_data.arrivalTime}}</span>
+                                        <br> Towards {{stop_data.destinationName}}
                                     </p>
                                 </div>
                             </div>
