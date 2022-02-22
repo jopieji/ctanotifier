@@ -29,11 +29,14 @@ def index(request):
         estArrivalFormatted = estArrivalFormatted[11:] + " AM"
 
     requestTime = response['ctatt']['tmst'][14:16]
-    minToArrival = base[14:16]
-    print(requestTime)
-    print(minToArrival)
-    arrival = int(minToArrival) - int(requestTime)
+    arrivalMin = base[14:16]
+    
+    arrival = int(arrivalMin) - int(requestTime)
     #arrival = 0
+    
+    if abs(arrival) > 40:
+        arrival = 60 - int(requestTime) - int(arrivalMin)
+    print(arrival)
 
     stop_data = {
         # stopID will be inserted with variable once its working; just like key is in URL above; just use that variable
