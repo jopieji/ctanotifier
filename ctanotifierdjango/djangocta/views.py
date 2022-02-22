@@ -33,9 +33,9 @@ def index(request):
     
     arrival = int(arrivalMin) - int(requestTime)
     #arrival = 0
-    
+
     if abs(arrival) > 40:
-        arrival = 60 - int(requestTime) - int(arrivalMin)
+        arrival = 60 - int(requestTime) + int(arrivalMin)
     print(arrival)
 
     stop_data = {
