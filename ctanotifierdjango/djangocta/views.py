@@ -43,39 +43,39 @@ red_line_ids = {
 }
 
 # brown line stop ids: I DID THESE WRONG; THESE ARE MAP ID
-"""
+
 brn_line_ids = {
-        'kimball': 41290,
-        'kedzie': 41180,
-        'francisco': 40870,
-        'rockwell': 41010,
-        'western': 41480,
-        'damen': 40090,
-        'montrose': 41500,
-        'irving park': 41460,
-        'addison': 41440,
-        'paulina': 41310,
-        'southport': 40360,
-        'belmont': 41320,
-        'wellington': 41210,
-        'diversey': 40530,
-        'fullerton': 41220,
-        'armitage': 40660,
-        'sedgwick': 40800,
-        'chicago': 40710,
-        'merchandise mart': 40460,
-        'clark/lake': 40380,
-        'state/lake': 40260,
-        'randolph/wabash': 0,
-        'madison/wabash': 0,
-        'adams/wabash': 40680,
-        'harold washington library': 40850,
-        'lasalle/van buren': 40160,
-        'quincy': 40040,
-        'washington/wabash': 41700,
-        'washington/wells': 40730
+        'kimball': [30249, 30250],
+        'kedzie': [30225, 30226],
+        'francisco': [30167, 30168],
+        'rockwell': [30195, 30196],
+        'western': [30283, 30284],
+        'damen': [30018, 30019],
+        'montrose': [30287, 30288],
+        'irving park': [30281, 30282],
+        'addison': [30277, 30278],
+        'paulina': [30253, 30254],
+        'southport': [30070, 30071],
+        'belmont': [30257, 30258],
+        'wellington': [30231, 30232],
+        'diversey': [30103, 30104],
+        'fullerton': [30235, 30236],
+        'armitage': [30127, 20128],
+        'sedgwick': [30155, 30156],
+        'chicago': [30137, 30138],
+        'merchandise mart': [30090, 30091],
+        'clark/lake': [40380, 'S'],
+        'state/lake': [30051, 'S'],
+        'randolph/wabash': [0, 'S'],
+        'madison/wabash': [0, 'S'],
+        'adams/wabash': [30131, 'S'],
+        'harold washington library': [30165, 'S'],
+        'lasalle/van buren': [30030, 'S'],
+        'quincy': [30008, 'S'],
+        'washington/wabash': [30383, 'S'],
+        'washington/wells': [30142, 'S']
 }
-"""
+
 
 # Create your views here.
 def index(request):
@@ -86,7 +86,7 @@ def index(request):
     trig = 0
     if ns == "s":
         trig = 1
-    key = ""
+    key = "keyGoesHere"
     desiredStop = red_line_ids.get(stop)[trig]
     print(desiredStop)
     url = "http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key={}&stpid={}&outputType=JSON"
