@@ -2,6 +2,7 @@ from django.shortcuts import render
 # this isn't working. Need to investigate why
 #import keyHold
 import requests
+from .models import Stops
 
 # red line stop id's
     # this probably isn't where these are stored, but for now it's where they are going
@@ -81,58 +82,79 @@ brn_line_ids = {
 def index(request):
     # base url: http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx
     # test id: 30126 for N/C
+    """
     stop = input("What stop are you wanting data for?\n").lower()
     ns = input("Northbound or southbound? (type 'n' or 's')\n").lower()
     trig = 0
     if ns == "s":
         trig = 1
-    key = "keyGoesHere"
-    desiredStop = red_line_ids.get(stop)[trig]
-    print(desiredStop)
-    url = "http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key={}&stpid={}&outputType=JSON"
+    """
+    # KEY FOR API
+    key = "keyHere"
+
+    # database query to get all user stops
+    stops = Stops.objects.all()
+
+    # list to store response dictionaries
+    stopList = []
+
+    # for each stop obj in stops database
+    for stop in stops:
+        #print("Stop: " + stop.stop)
+        desiredStop = red_line_ids.get(stop.stop)[0]
+        print(desiredStop)
+        url = "http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key={}&stpid={}&outputType=JSON"
     
-    response = requests.get(url.format(key, desiredStop)).json()
-    print(response)
+        response = requests.get(url.format(key, desiredStop)).json()
+        #print(response)
 
-    # might need to generate dictionaries in a loop or store them in a list
-    # more than one dictionary per response
-    ## ctatt is the exterior
-    
-    base = response['ctatt']['eta'][0]['arrT']
+        # might need to generate dictionaries in a loop or store them in a list
+        # more than one dictionary per response
+        ## ctatt is the exterior
+        
+        # our base returned arrival time
+        base = response['ctatt']['eta'][0]['arrT']
 
-    estArrivalFormatted = base
+        estArrivalFormatted = base
 
-    firstTwo = estArrivalFormatted[11:13]
-    if int(firstTwo) > 12:
-        hrNum = int(firstTwo) - 12
-        estArrivalFormatted = str(hrNum) + estArrivalFormatted[13:] + " PM"
-    else:
-        estArrivalFormatted = estArrivalFormatted[11:] + " AM"
+        # de-formatting from miliary time
+        firstTwo = estArrivalFormatted[11:13]
+        if int(firstTwo) > 12:
+            hrNum = int(firstTwo) - 12
+            estArrivalFormatted = str(hrNum) + estArrivalFormatted[13:] + " PM"
+        else:
+            estArrivalFormatted = estArrivalFormatted[11:] + " AM"
 
-    requestTime = response['ctatt']['tmst'][14:16]
-    arrivalMin = base[14:16]
-    
-    arrival = int(arrivalMin) - int(requestTime)
-    #arrival = 0
+        # request time formatting
+        requestTime = response['ctatt']['tmst'][14:16]
+        arrivalMin = base[14:16]
+        
+        # minutes to arrival calculation
+        arrival = int(arrivalMin) - int(requestTime)
 
-    if abs(arrival) > 40:
-        arrival = 60 - int(requestTime) + int(arrivalMin)
-    print(arrival)
+        # here's the fix for when the hour changes between request and arrival time
+        if abs(arrival) > 40:
+            arrival = 60 - int(requestTime) + int(arrivalMin)
+        print(arrival)
 
-    stop_data = {
-        # stopID will be inserted with variable once its working; just like key is in URL above; just use that variable
-        'requestTime' : response['ctatt']['tmst'],
-        'stopId' : response['ctatt']['eta'][0]['stpId'],
-        'stationName' : response['ctatt']['eta'][0]['staNm'],
-        'destinationName' : response['ctatt']['eta'][0]['destNm'],
-        'predictionTime' : response['ctatt']['eta'][0]['prdt'],
-        'arrivalTime' : estArrivalFormatted,
-        'approachingBool' : response['ctatt']['eta'][0]['isApp'],
-        'delayedBool' : response['ctatt']['eta'][0]['isDly'],
-        'arrival' : arrival,
-    }
+        stop_data = {
+            # stopID will be inserted with variable once its working; just like key is in URL above; just use that variable
+            'requestTime' : response['ctatt']['tmst'],
+            'stopId' : response['ctatt']['eta'][0]['stpId'],
+            'stationName' : response['ctatt']['eta'][0]['staNm'],
+            'destinationName' : response['ctatt']['eta'][0]['destNm'],
+            'predictionTime' : response['ctatt']['eta'][0]['prdt'],
+            'arrivalTime' : estArrivalFormatted,
+            'approachingBool' : response['ctatt']['eta'][0]['isApp'],
+            'delayedBool' : response['ctatt']['eta'][0]['isDly'],
+            'arrival' : arrival,
+        }
+
+        stopList.append(stop_data)
+
+    print(stopList)
 
     # passing info to template
-    context = {'stop_data' : stop_data}
+    context = {'stopList' : stopList}
 
     return render(request, 'djangocta/djangocta.html', context)
