@@ -3,6 +3,7 @@ from django.shortcuts import render
 #import keyHold
 import requests
 from .models import Stops
+from .forms import StopForm
 
 # red line stop id's
     # this probably isn't where these are stored, but for now it's where they are going
@@ -82,31 +83,33 @@ brn_line_ids = {
 def index(request):
     # base url: http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx
     # test id: 30126 for N/C
-    """
-    stop = input("What stop are you wanting data for?\n").lower()
-    ns = input("Northbound or southbound? (type 'n' or 's')\n").lower()
-    trig = 0
-    if ns == "s":
-        trig = 1
-    """
+    
     # KEY FOR API
-    key = "keyHere"
+    key = ""
 
     # database query to get all user stops
     stops = Stops.objects.all()
 
     # list to store response dictionaries
     stopList = []
+    
+    # logic to store user inputs from form in database
+    url = "http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key={}&stpid={}&outputType=JSON"
+
+    if request.method == "POST":
+        print(request.POST)
+        form = StopForm(request.POST)
+        form.save()
+
+    form = StopForm()
 
     # for each stop obj in stops database
     for stop in stops:
         #print("Stop: " + stop.stop)
-        desiredStop = red_line_ids.get(stop.stop)[0]
-        print(desiredStop)
-        url = "http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key={}&stpid={}&outputType=JSON"
-    
+        desiredStop = red_line_ids.get(stop.stop)[0]    
+
         response = requests.get(url.format(key, desiredStop)).json()
-        #print(response)
+
 
         # might need to generate dictionaries in a loop or store them in a list
         # more than one dictionary per response
@@ -155,6 +158,6 @@ def index(request):
     print(stopList)
 
     # passing info to template
-    context = {'stopList' : stopList}
+    context = {'stopList' : stopList, 'form': form}
 
     return render(request, 'djangocta/djangocta.html', context)

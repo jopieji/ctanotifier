@@ -8,3 +8,4 @@ ctanotifierdjango/djangocta/__pycache__
 ctanotifierdjango/djangocta/migrations
 ctanotifierdjango/djangocta/config.py
 ctanotifierdjango/djangocta/keyHold.py
+ctanotifierdjango/djangocta/templates/djangocta/styles.css

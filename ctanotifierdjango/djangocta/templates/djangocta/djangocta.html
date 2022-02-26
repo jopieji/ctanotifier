@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+    <!--<link rel="stylesheet" href="C:\Users\Jake Opie\ctanotifier\ctanotifierdjango\djangocta\templates\djangocta\styles.css" />-->
 </head>
 
 <body>
@@ -24,12 +25,13 @@
             <div class="columns">
                 <div class="column is-offset-4 is-4">
                     <form method="POST">
+                        {% csrf_token %}
                         <div class="field has-addons">
                             <div class="control is-expanded">
-                                <input class="input" type="text" placeholder="Stop Name">
+                                {{ form.stop }}
                             </div>
                             <div class="control">
-                                <button class="button is-info">
+                                <button type="submit" class="button is-info">
                                     Add Stop
                                 </button>
                             </div>
