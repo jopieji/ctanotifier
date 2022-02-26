@@ -85,7 +85,7 @@ def index(request):
     # test id: 30126 for N/C
     
     # KEY FOR API
-    key = ""
+    key = "880e68d77bed4ca4b68a5681cbf7def5"
 
     # database query to get all user stops
     stops = Stops.objects.all()
