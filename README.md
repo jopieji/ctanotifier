@@ -25,7 +25,7 @@ I've fully pivoted to using Django.
 I've realized Django is a rabbit hole that doesn't align with my career goals, so I'm going to finish this project with notifications, and then work on a mobile app using React Native. I've got an internship coming up that requires me to know React native, so this is better for my short-term future. 
 
 ### Technology
-The technologies I plan on using are Javascript, Java, Spring Boot, and the CTA Train Tracker API.
+The technologies I am using are Python, Django, and the CTA Train Tracker API. I'm not sure where I'll host it just yet.
 
 I might add the CTA Bus Tracker API once I get an MVP up and running.
 
