@@ -97,18 +97,24 @@ def index(request):
     url = "http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key={}&stpid={}&outputType=JSON"
 
     if request.method == "POST":
-        print(request.POST)
+        #print(request.POST)
         form = StopForm(request.POST)
         form.save()
 
+    # clear text box
     form = StopForm()
 
     # for each stop obj in stops database
     for stop in stops:
+        if stop.stop not in brn_line_ids.keys():
+            continue
         #print("Stop: " + stop.stop)
-        desiredStop = red_line_ids.get(stop.stop)[0]    
+        desiredStop = brn_line_ids.get(stop.stop)   
 
-        response = requests.get(url.format(key, desiredStop)).json()
+        # need to implement buttons NOW
+ 
+        print(desiredStop)
+        response = requests.get(url.format(key, desiredStop[0])).json()
 
 
         # might need to generate dictionaries in a loop or store them in a list
