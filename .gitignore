@@ -9,3 +9,4 @@ ctanotifierdjango/djangocta/migrations
 ctanotifierdjango/djangocta/config.py
 ctanotifierdjango/djangocta/keyHold.py
 ctanotifierdjango/djangocta/templates/djangocta/styles.css
+ctanotifierdjango/djangocta/static
