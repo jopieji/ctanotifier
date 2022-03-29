@@ -13,8 +13,6 @@ Right now, I am experiementing with creating a sort of intermediary API that wil
 the remote CTA Train Tracker API. I want to take this approach to get some experience developing APIs in Java, as using a framework like Express with Node or
 React would be much easier in this context. I might shift this choice later on, but we will see.
 
-Spring Boot might not be the right choice either because it usually interfaces with a database, which as of right now, I don't plan on using. I could store each user's stops in a NOSQL database, but I don't need much functionality of my API; it is solely to add the API key to the URL. This also might change, but for now I am content with my initial idea. 
-
 2/18/2022 Update
 I'm having issues with Java dependencies, Maven, and other configuration stuff, so I might try and implement this using Django. This is something I've been looking into for over a year, but have yet to work with Django on a project.
 
@@ -26,8 +24,6 @@ I've realized Django is a rabbit hole that doesn't align with my career goals, s
 
 ### Technology
 The technologies I am using are Python, Django, and the CTA Train Tracker API. I'm not sure where I'll host it just yet.
-
-I might add the CTA Bus Tracker API once I get an MVP up and running.
 
 ---
 ### Future Plans
